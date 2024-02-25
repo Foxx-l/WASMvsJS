@@ -6,7 +6,7 @@ use wasm_bindgen::prelude::*;
 pub fn wasm_sieve(limit: usize) -> Vec<usize> {
     // Create a boolean vector to track whether each number is prime
     let mut sieve: Vec<bool> = vec![true; limit + 1];
-    let primes: Vec<usize> = Vec::new();
+    let mut primes: Vec<usize> = Vec::new();
     // 0 and 1 are not prime numbers
     sieve[0] = false;
     sieve[1] = false;
@@ -19,7 +19,11 @@ pub fn wasm_sieve(limit: usize) -> Vec<usize> {
             }
         }
     }
-    
+    for i in 2..=limit {
+        if sieve[i] {
+            primes.push(i);
+        }
+    }
     primes
 }
 
