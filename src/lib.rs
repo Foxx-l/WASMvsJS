@@ -6,20 +6,20 @@ use wasm_bindgen::prelude::*;
 pub fn wasm_sieve(limit: usize) -> Vec<usize> {
     // Create a boolean vector to track whether each number is prime
     let mut sieve: Vec<bool> = vec![true; limit + 1];
-    let mut primes: Vec<usize> = Vec::new();
+    let primes: Vec<usize> = Vec::new();
     // 0 and 1 are not prime numbers
     sieve[0] = false;
     sieve[1] = false;
     // Iterate through the numbers starting from 2
     for i in 2..=(limit as f64).sqrt() as usize {
         if sieve[i] {
-            primes.push(i);
             // Mark multiples of the current prime number as not prime
             for j in (i * i..=limit).step_by(i) {
                 sieve[j] = false;
             }
         }
     }
+    
     primes
 }
 

@@ -1,4 +1,4 @@
-import init, { wasm_sieve,  wasm_ram_test, wasm_create_elements} from './testing/pkg/testing.js';
+import init, { wasm_sieve,  wasm_ram_test, wasm_create_elements} from './pkg/WASMvsJS.js';
 // calling SoE in JS
 
 const funcs = {
@@ -24,12 +24,13 @@ document.addEventListener("DOMContentLoaded", function () {
                     const startTime = performance.now();
                     output = implementation(input);
                     const endTime = performance.now();
+                    console.log(output);
                     const elapsedTime = endTime - startTime;
                     totalTime += elapsedTime;
                     console.log(`Run ${i + 1}: ${elapsedTime} milliseconds`);
                 }
                 const averageTime = totalTime / runs;
-                console.log(output);
+                
                 console.log(`Function ${testName}, ${rust_js[index]} with input ${input} took ${averageTime/1000} seconds to execute`);
             });
             document.body.appendChild(button);
@@ -44,10 +45,14 @@ function js_sieve(limit) {
     const primes = [];
     for (let i = 2; i <= Math.sqrt(limit); i++) {
         if (sieve[i]) {
-            primes.push(i);
             for (let j = i ** 2; j <= limit; j += i) {
                 sieve[j] = false;
             }
+        }
+    }
+    for (let i = 0; i < sieve.length; i++) {
+        if (sieve[i]) {
+            primes.push(i);
         }
     }
     return primes;
