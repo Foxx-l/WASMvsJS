@@ -1,0 +1,14 @@
+{
+  "name": "WASMvsJS",
+  "version": "0.1.0",
+  "files": [
+    "WASMvsJS_bg.wasm",
+    "WASMvsJS.js",
+    "WASMvsJS.d.ts"
+  ],
+  "module": "WASMvsJS.js",
+  "types": "WASMvsJS.d.ts",
+  "sideEffects": [
+    "./snippets/*"
+  ]
+}
