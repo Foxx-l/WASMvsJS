@@ -18,7 +18,7 @@ document.addEventListener("DOMContentLoaded", function () {
             button.textContent = `Run ${testName} with ${rust_js[index]}`;
             button.addEventListener("click", () => {
                 const input = prompt("Input:");
-                let totalTime = 0;
+                let totalTime = [];
                 let output;
                 for (let i = 0; i < runs; i++) {
                     const startTime = performance.now();
@@ -26,12 +26,12 @@ document.addEventListener("DOMContentLoaded", function () {
                     const endTime = performance.now();
                     console.log(output);
                     const elapsedTime = endTime - startTime;
-                    totalTime += elapsedTime;
+                    totalTime.push(elapsedTime);
                     console.log(`Run ${i + 1}: ${elapsedTime} milliseconds`);
                 }
-                const averageTime = totalTime / runs;
-                
-                console.log(`Function ${testName}, ${rust_js[index]} with input ${input} took ${averageTime/1000} seconds to execute`);
+                const averageTime = totalTime.reduce((a,b) => a+b, 0) / runs;
+                console.log('Total time:', totalTime)
+                console.log(`Function ${testName}, ${rust_js[index]} with input ${input} took ${averageTime} miliseconds to execute`);
             });
             document.body.appendChild(button);
         }
